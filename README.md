@@ -1,24 +1,47 @@
-# README
+# Todo App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+We are building a Todo App together!  At first we will use Rails, and later we will use a combination of Rails and React.
 
-Things you may want to cover:
+### Ruby Version
 
-* Ruby version
+* 2.5 or greater
 
-* System dependencies
+### System dependencies
 
-* Configuration
+* sqlite3, which should already be on your machine
 
-* Database creation
+### Database creation
 
-* Database initialization
+* Not needed for as long as we are using sqlite3
 
-* How to run the test suite
+### Database initialization
 
-* Services (job queues, cache servers, search engines, etc.)
+* Coming soon
 
-* Deployment instructions
+### How to run the test suite
 
-* ...
+* Coming soonish
+
+### Services
+
+* Coming later
+
+### Deployment instructions
+
+* Coming later
+
+### Collaboration
+
+* Work on a branch that corresponds with an issue filed on this repository, and has your name in it.  (For example: `feature-1-andy-my-awesome-feature`).
+* Try to make one commit per logical unit of work.
+* Try to use descriptive commit messages.
+* Push your branch to GitHub and submit a pull request.
+* Say which issue the pull request [closes](https://help.github.com/articles/closing-issues-using-keywords/) in the body of your pull request.
+* Request a code review from one of this repository's [CODEOWNERS](https://github.com/orgs/wyncode/teams/codeowners/members).
+
+### Code Formatting
+ 
+* Tabs are really two spaces.
+* Each file should end with a newline.
+* Use proper indentation.
+* Don't add or remove whitespace without a well thought-out reason.
