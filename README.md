@@ -2,6 +2,11 @@
 
 We are building a Todo App together!  At first we will use Rails, and later we will use a combination of Rails and React.
 
+## Setup
+
+* `bundle`
+* `yarn`
+
 ### Ruby Version
 
 * 2.5 or greater
@@ -16,7 +21,7 @@ We are building a Todo App together!  At first we will use Rails, and later we w
 
 ### Database initialization
 
-* Coming soon
+* `rails db:migrate`
 
 ### How to run the test suite
 
@@ -40,7 +45,7 @@ We are building a Todo App together!  At first we will use Rails, and later we w
 * Request a code review from one of this repository's [CODEOWNERS](https://github.com/orgs/wyncode/teams/codeowners/members).
 
 ### Code Formatting
- 
+
 * Tabs are really two spaces.
 * Each file should end with a newline.
 * Use proper indentation.
