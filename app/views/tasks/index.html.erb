@@ -11,14 +11,14 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.description %></td>
         <td>
-          <%= link_to 'Destroy',
-              task,
-              method: :delete,
-              data: { confirm: 'Are you sure?' },
-              class: "btn btn-danger float-right" %>
+          <% if task.completed? %>
+            <s><%= task.description %></s>
+          <% else %>
+            <%= task.description %>
+          <% end %>
         </td>
+        <td><%= render 'buttons', task: task %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:destroy]
+  before_action :set_task, only: [:update, :destroy]
 
   # GET /tasks
   def index
@@ -16,7 +16,12 @@ class TasksController < ApplicationController
       redirect_to root_url, alert: @task.errors.full_messages.to_sentence
     end
   end
-
+  
+  # PUT/PATCH /tasks/1
+  def update
+    @task.update(completed: !@task.completed)
+    redirect_to root_path, notice: 'Task was successfully updated.'
+  end
 
   # DELETE /tasks/1
   def destroy
