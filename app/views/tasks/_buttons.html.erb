@@ -1,0 +1,11 @@
+<%= form_with(model: task) do |form| %>
+  <div class="btn-group float-right">
+    <%= form.submit task.completed? ? "Mark Incomplete" : "Mark Complete",
+        class: "btn btn-secondary btn-sm" %>
+    <%= link_to 'Destroy',
+        task,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        class: "btn btn-danger btn-sm" %>
+  </div>
+<% end %>
