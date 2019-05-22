@@ -10,8 +10,11 @@ class TasksController < ApplicationController
   # POST /tasks
   def create
     @task = Task.new(task_params)
-    @task.save
-    redirect_to root_url, notice: 'Task was successfully created.'
+    if @task.save
+      redirect_to root_url, notice: 'Task was successfully created.'
+    else
+      redirect_to root_url, alert: @task.errors.full_messages.to_sentence
+    end
   end
 
 
