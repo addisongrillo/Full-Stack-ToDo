@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Tasks</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Description</th>
@@ -14,7 +12,13 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.description %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Destroy',
+              task,
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: "btn btn-danger float-right" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
