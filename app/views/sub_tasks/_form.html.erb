@@ -1,0 +1,12 @@
+<%= form_with(model: [task, sub_task], local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_field :description,
+        class: "form-control",
+        autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit nil, class: "btn btn-primary" %>
+  </div>
+<% end %>
