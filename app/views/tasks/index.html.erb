@@ -1,4 +1,4 @@
-<h1>Tasks</h1>
+<h1><%= params[:status]&.titleize || "All" %> Tasks</h1>
 
 <table class="table">
   <thead>
@@ -26,4 +26,6 @@
 
 <hr>
 
-<%= render 'form', task: @task %>
+<% unless params["status"] == "completed" %>
+  <%= render 'form', task: @task %>
+<%end%>
