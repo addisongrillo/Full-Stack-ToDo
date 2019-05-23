@@ -3,7 +3,14 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    @tasks = case params[:status]
+                  when "completed"
+                    Task.completed
+                  when "pending"
+                    Task.pending
+                  else
+                    Task.all
+                  end
     @task  = Task.new
   end
 
@@ -20,13 +27,15 @@ class TasksController < ApplicationController
   # PUT/PATCH /tasks/1
   def update
     @task.update(completed: !@task.completed)
-    redirect_to root_path, notice: 'Task was successfully updated.'
+    redirect_back fallback_location: root_path,
+      notice: 'Task was successfully updated.'
   end
 
   # DELETE /tasks/1
   def destroy
     @task.destroy
-    redirect_to root_url, notice: 'Task was successfully destroyed.'
+    redirect_back fallback_location: root_path,
+      notice: 'Task was successfully destroyed.'
   end
 
   private
