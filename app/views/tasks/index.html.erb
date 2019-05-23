@@ -18,7 +18,11 @@
             <%= task.description %>
           <% end %>
         </td>
-        <td><%= render 'buttons', task: task %></td>
+        <td>
+            <%= link_to "Details",
+                task_sub_tasks_path(task),
+                class: "btn btn-info" %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -34,8 +34,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task.destroy
-    redirect_back fallback_location: root_path,
-      notice: 'Task was successfully destroyed.'
+    redirect_to root_path, notice: 'Task was successfully destroyed.'
   end
 
   private
