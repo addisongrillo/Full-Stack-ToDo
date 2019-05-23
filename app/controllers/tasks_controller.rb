@@ -18,9 +18,9 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to root_url, notice: 'Task was successfully created.'
+      redirect_back fallback_location: root_path, notice: 'Task was successfully created.'
     else
-      redirect_to root_url, alert: @task.errors.full_messages.to_sentence
+      redirect_back fallback_location: root_path, alert: @task.errors.full_messages.to_sentence
     end
   end
   
