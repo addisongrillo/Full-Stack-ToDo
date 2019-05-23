@@ -26,6 +26,6 @@
 
 <hr>
 
-<% unless params["status"] %>
+<% unless params["status"] == "completed" %>
   <%= render 'form', task: @task %>
 <%end%>
