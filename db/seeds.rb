@@ -7,10 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 20.times do
-  Task.create!(
+  task = Task.new(
     description:  Faker::ChuckNorris.fact,
-    completed:    [true, false].sample
+    completed:    [true, false].sample,
+    due_date:     Faker::Date.between(3.months.ago.to_date, 3.months.from_now.to_date)
   )
+  task.due_date = nil if [true, false].sample
+  task.save!
 end
 
 puts "#{Task.count} tasks in the system..."

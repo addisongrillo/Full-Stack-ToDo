@@ -6,6 +6,12 @@
   <% end %>
 </h1>
 
+<h3>
+  <span class="<%= @task.due_date_class %>">
+    <%= @task.due_date&.strftime('%-m/%-d/%Y')%>
+  </span>
+</h3>
+
 <%= render 'tasks/buttons', task: @task %>
 
 <table class="table">
