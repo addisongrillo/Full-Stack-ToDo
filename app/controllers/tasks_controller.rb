@@ -43,6 +43,18 @@ class TasksController < ApplicationController
               else
                 @tasks
               end
+    @tasks  = case params[:due]
+              when "past_due"
+                @tasks.past_due
+              when "due_soon"
+                @tasks.due_soon
+              when "due_later"
+                @tasks.due_later
+              when "not_due"
+                @tasks.not_due
+              else
+                @tasks
+              end
   end
 
   # Use callbacks to share common setup or constraints between actions.

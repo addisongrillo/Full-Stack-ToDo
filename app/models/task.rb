@@ -3,9 +3,17 @@ class Task < ApplicationRecord
 
   validates :description, presence: true
 
-  scope :completed, -> { where(completed: true) }
-  scope :pending,   -> { where(completed: false) }
-  scope :ordered,   -> { order(due_date: :asc) }
+  scope :completed, ->  { where(completed: true) }
+  scope :pending,   ->  { where(completed: false) }
+  scope :ordered,   ->  { order(due_date: :asc) }
+  scope :past_due,  ->  { where("due_date < ?", Date.today) }
+  scope :due_soon,  ->  {
+                          where("due_date >= ? and due_date < ?",
+                          Date.today, 1.week.from_now.to_date)
+                        }
+  scope :due_later, ->  { where("due_date >= ?", 1.week.from_now.to_date) }
+  scope :not_due,   ->  { where(due_date: nil) }
+
 
   def due_date_class
     if due_date.nil?

@@ -22,28 +22,6 @@ RSpec.describe "viewing tasks", type: :system, js: true do
       expect(page).to have_text not_due.description
     end
   end
-  context "when the user requests completed tasks" do
-    it "only displays completed tasks" do
-      Task.create(description: "Completed Task", completed: true)
-      Task.create(description: "Pending Task", completed: false)
-
-      visit root_path(status: "completed")
-
-      expect(page).to have_text "Completed Task"
-      expect(page).to_not have_text "Pending Task"
-    end
-  end
-  context "when the user requests pending tasks" do
-    it "only displays pending tasks" do
-      Task.create(description: "Completed Task", completed: true)
-      Task.create(description: "Pending Task", completed: false)
-
-      visit root_path(status: "pending")
-
-      expect(page).to have_text "Pending Task"
-      expect(page).to_not have_text "Completed Task"
-    end
-  end
   context "when the user requests all tasks" do
     it "displays both pending and completed tasks" do
       Task.create(description: "Completed Task", completed: true)

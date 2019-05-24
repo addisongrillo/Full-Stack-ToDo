@@ -1,0 +1,18 @@
+<p>
+  <%= link_to "Past Due",
+      root_url(due: "past_due", status: params[:status]),
+      class: "badge badge-danger #{params[:due] == 'past_due' ? 'badge-lg' : 'badge-sm'}",
+      id: 'menu-past-due' %>
+  <%= link_to "Due Soon",
+      root_url(due: "due_soon", status: params[:status]),
+      class: "badge badge-warning #{params[:due] == 'due_soon' ? 'badge-lg' : 'badge-sm'}",
+      id: 'menu-due-soon' %>
+  <%= link_to "Due Later",
+      root_url(due: "due_later", status: params[:status]),
+      class: "badge badge-success #{params[:due] == 'due_later' ? 'badge-lg' : 'badge-sm'}",
+      id: 'menu-due-later' %>
+  <%= link_to "Not Due",
+      root_url(due: "not_due", status: params[:status]),
+      class: "badge badge-secondary #{params[:due] == 'not_due' ? 'badge-lg' : 'badge-sm'}",
+      id: 'menu-not-due' %>
+</p>
