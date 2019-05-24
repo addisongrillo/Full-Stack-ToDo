@@ -1,0 +1,9 @@
+<%= form_with(url: root_url, method: :get, local: true) do |form| %>
+  <%= form.search_field :term,
+      placeholder: "Search",
+      autocomplete: "off",
+      value: params[:term],
+      class: "form-control mb-2" %>
+  <%= form.hidden_field :status, value: params[:status] %>
+  <%= form.hidden_field :due, value: params[:due] %>
+<% end %>

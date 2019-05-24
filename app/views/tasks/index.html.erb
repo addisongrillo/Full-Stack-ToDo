@@ -1,6 +1,8 @@
-<h1><%= params[:status]&.titleize || "All" %> Tasks</h1>
+<h1><%= params[:status].present? ? params[:status].titleize : "All" %> Tasks</h1>
 
 <%= render 'menu' %>
+
+<%= render 'search' %>
 
 <%= render 'table', tasks: @tasks %>
 

@@ -58,6 +58,7 @@ class TasksController < ApplicationController
               else
                 @tasks
               end
+    @tasks  = @tasks.search(params[:term])
   end
 
   # Use callbacks to share common setup or constraints between actions.
