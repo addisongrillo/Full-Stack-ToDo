@@ -5,6 +5,7 @@ class Task < ApplicationRecord
 
   scope :completed, -> { where(completed: true) }
   scope :pending,   -> { where(completed: false) }
+  scope :ordered,   -> { order(due_date: :asc) }
 
   def due_date_class
     if due_date.nil?

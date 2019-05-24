@@ -1,16 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:update, :destroy]
+  before_action :set_tasks, only: [:index]
+
 
   # GET /tasks
   def index
-    @tasks = case params[:status]
-                  when "completed"
-                    Task.completed
-                  when "pending"
-                    Task.pending
-                  else
-                    Task.all
-                  end
     @task  = Task.new
   end
 
@@ -38,6 +32,19 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def set_tasks
+    @tasks  = Task.all.ordered
+    @tasks  = case params[:status]
+              when "completed"
+                @tasks.completed
+              when "pending"
+                @tasks.pending
+              else
+                @tasks
+              end
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = Task.find(params[:id])
