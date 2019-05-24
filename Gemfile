@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '>= 2.5'
 
+gem 'will_paginate-bootstrap4'
 gem 'faker'
 gem 'hirb'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
