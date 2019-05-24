@@ -5,7 +5,10 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @task  = Task.new
+    page      = (params[:page] || 1).to_i
+    per_page  = 5
+    @tasks    = @tasks.paginate(page: page, per_page: per_page)
+    @task     = Task.new
   end
 
   # POST /tasks

@@ -4,6 +4,8 @@
 
 <%= render 'table', tasks: @tasks %>
 
+<%= will_paginate @tasks %>
+
 <hr>
 
 <% unless params["status"] == "completed" %>
