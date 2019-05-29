@@ -4,12 +4,19 @@
     <title>TodoApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="turbolinks-cache-control" content="no-preview"></meta>
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     >
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css"
+      integrity="sha256-gVCm5mRCmW9kVgsSjQ7/5TLtXqvfCoxhdsjE6O1QLm8="
+      crossorigin="anonymous"
+    />
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
@@ -58,7 +65,7 @@
         </button>
       </div>
     <% end %>
-    <div class="container">
+    <div class="container animated fadeIn faster">
       <%= yield %>
     </div>
   </body>

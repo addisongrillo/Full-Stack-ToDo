@@ -11,10 +11,12 @@ class TasksController < ApplicationController
         @task = Task.new
       end
       format.json do
-        page      = (params[:page] || 1).to_i
-        per_page  = 5
-        @tasks    = @tasks.paginate(page: page, per_page: per_page)
-        render json: { tasks: @tasks }
+        page        = (params[:page] || 1).to_i
+        per_page    = 5
+        total_pages = (@tasks.count.to_f / per_page).ceil
+        total_pages = 1 if total_pages.zero?
+        @tasks      = @tasks.paginate(page: page, per_page: per_page)
+        render json: { tasks: @tasks, page: page, totalPages: total_pages }
       end
     end
   end
