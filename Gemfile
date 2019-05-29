@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '>= 2.5'
 
+gem 'react_on_rails'
 gem 'will_paginate-bootstrap4'
 gem 'faker'
 gem 'hirb'
