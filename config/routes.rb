@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'hello_world', to: 'hello_world#index'
   root 'tasks#index'
   resources :tasks, only: [:create, :destroy, :update] do
     resources :sub_tasks, only: [:index, :create, :update, :destroy], shallow: true
