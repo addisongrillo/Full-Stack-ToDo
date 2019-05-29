@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Menu from './Menu'
 import Table from './Table'
+import Search from './Search'
 
 class Tasks extends Component {
   state = {
@@ -12,32 +13,44 @@ class Tasks extends Component {
 
   componentDidMount(){
     const { status, due } = this.state
-    this.fetchTasks(status, due)
+    const term = ''
+    this.fetchTasks(status, due, term)
   }
 
-  fetchTasks = (status, due) => {
-    axios.get(`/tasks.json?status=${status}&due=${due}`)
+  fetchTasks = (status, due, term) => {
+    axios.get(`/tasks.json?status=${status}&due=${due}&term=${term}`)
       .then(response => {
         const { tasks } = response.data
-        this.setState({ tasks, status, due })
+        this.setState({ tasks, status, due, term })
       })
   }
 
   handleDueClick = selectedDue => {
-    let { status, due } = this.state
+    let { status, due, term } = this.state
     if(selectedDue === due){
       due = ''
     }else{
       due = selectedDue
     }
-    this.fetchTasks(status, due)
+    this.fetchTasks(status, due, term)
+  }
+
+  handleSearch = event => {
+    const term = event.target.value
+    const { status, due } = this.state
+    this.fetchTasks(status, due, term)
   }
 
   render(){
-    const { tasks, due } = this.state
+    const { tasks, due, term } = this.state
     return(
       <React.Fragment>
         <Menu due={due} handleDueClick={this.handleDueClick} />
+        <Search
+          term={term}
+          handleSearch={this.handleSearch}
+          invalid={ tasks.length === 0 && term.length > 0 }
+        />
         <Table tasks={tasks}/>
       </React.Fragment>
     )
