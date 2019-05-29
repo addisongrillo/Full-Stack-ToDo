@@ -18,7 +18,7 @@ RSpec.describe "paginating tasks", type: :system, js: true do
     it "displays the next five tasks" do
       (1..10).each{|n| Task.create(description: "Task #{n}") }
       visit root_path
-      first('*[rel="next"]').click
+      click_button("Next")
  
       expect(page).to have_text("Task 6")
       expect(page).to have_text("Task 7")
@@ -33,7 +33,7 @@ RSpec.describe "paginating tasks", type: :system, js: true do
         (1..10).each{|n| Task.create(description: "Pending Task #{n}", completed: false) }
  
         visit root_path(completed: true)
-        click_link("2")
+        click_button("Next")
  
         expect(page).to have_text "Completed Task 6"
         expect(page).to have_text "Completed Task 7"
@@ -51,7 +51,7 @@ RSpec.describe "paginating tasks", type: :system, js: true do
  
           visit root_path
           find('#menu-past-due').click
-          click_link("2")
+          click_button("Next")
  
           expect(page).to have_text("Past Due Completed Task 6")
           expect(page).to have_text("Past Due Completed Task 7")

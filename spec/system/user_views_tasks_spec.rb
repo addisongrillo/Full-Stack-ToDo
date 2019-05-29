@@ -37,7 +37,9 @@ RSpec.describe "viewing tasks", type: :system, js: true do
     it "displays the due_date in red" do
       task = Task.create(description: "past due", due_date: 1.day.ago.to_date)
       visit root_path
- 
+
+      sleep 1
+
       color = find("#task_#{task.id} .due_date").native.css_value('background-color')
       expect(color).to eq('rgba(220, 53, 69, 1)')
     end
@@ -46,6 +48,8 @@ RSpec.describe "viewing tasks", type: :system, js: true do
     it "displays the due_date in yellow" do
       task = Task.create(description: "due soon", due_date: Date.tomorrow)
       visit root_path
+
+      sleep 1
  
       color = find("#task_#{task.id} .due_date").native.css_value('background-color')
       expect(color).to eq('rgba(255, 193, 7, 1)')
@@ -55,6 +59,8 @@ RSpec.describe "viewing tasks", type: :system, js: true do
     it "displays the due_date in green" do
       task = Task.create(description: "due later", due_date: 10.days.from_now.to_date)
       visit root_path
+
+      sleep 1
  
       color = find("#task_#{task.id} .due_date").native.css_value('background-color')
       expect(color).to eq('rgba(40, 167, 69, 1)')

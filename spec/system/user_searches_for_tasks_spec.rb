@@ -7,8 +7,13 @@ RSpec.describe "searching for tasks", type: :system, js: true do
     Task.create(description: "Learn Views")
  
     visit root_path
-    fill_in "term", with: "mOd\n"
- 
+    search_bar = find("#term")
+    search_bar.send_keys "m"
+    sleep 0.1
+    search_bar.send_keys "O"
+    sleep 0.1
+    search_bar.send_keys "d"
+
     expect(page).to have_text("Learn Models")
     expect(page).to_not have_text("Learn Controllers")
     expect(page).to_not have_text("Learn Views")
@@ -26,7 +31,17 @@ RSpec.describe "searching for tasks", type: :system, js: true do
  
       visit root_path(status: "completed")
       find('#menu-due-soon').click
-      fill_in "term", with: "rails\n"
+      search_bar = find("#term")
+ 
+      search_bar.send_keys "r"
+      sleep 0.1
+      search_bar.send_keys "a"
+      sleep 0.1
+      search_bar.send_keys "i"
+      sleep 0.1
+      search_bar.send_keys "l"
+      sleep 0.1
+      search_bar.send_keys "s"
  
       expect(page).to have_text "Learn Rails Completed Due Soon"
       expect(page).to_not have_text "Learn React"
