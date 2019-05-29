@@ -1,15 +1,7 @@
 <h1><%= params[:status].present? ? params[:status].titleize : "All" %> Tasks</h1>
 
-
-<%= react_component 'Tasks'%>
-
-<%# <%= render 'menu' %>
-
-<%# <%= render 'search' %>
-
-<%# <%= render 'table', tasks: @tasks %>
-
-<%# <%= will_paginate @tasks %>
+<%= react_component 'Tasks',
+    props: { status: params[:status] } %>
 
 <hr>
 
