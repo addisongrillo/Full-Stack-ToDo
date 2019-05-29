@@ -6,27 +6,38 @@ import Table from './Table'
 class Tasks extends Component {
   state = {
     status: this.props.status,
-    tasks:  [{}, {}, {}, {}, {}]
+    tasks:  [{}, {}, {}, {}, {}],
+    due: ''
   }
 
   componentDidMount(){
-    const { status } = this.state
-    this.fetchTasks(status)
+    const { status, due } = this.state
+    this.fetchTasks(status, due)
   }
 
-  fetchTasks = (status) => {
-    axios.get(`/tasks.json?status=${status}`)
+  fetchTasks = (status, due) => {
+    axios.get(`/tasks.json?status=${status}&due=${due}`)
       .then(response => {
         const { tasks } = response.data
-        this.setState({ tasks, status })
+        this.setState({ tasks, status, due })
       })
   }
 
+  handleDueClick = selectedDue => {
+    let { status, due } = this.state
+    if(selectedDue === due){
+      due = ''
+    }else{
+      due = selectedDue
+    }
+    this.fetchTasks(status, due)
+  }
+
   render(){
-    const { tasks } = this.state
+    const { tasks, due } = this.state
     return(
       <React.Fragment>
-        <Menu />
+        <Menu due={due} handleDueClick={this.handleDueClick} />
         <Table tasks={tasks}/>
       </React.Fragment>
     )
