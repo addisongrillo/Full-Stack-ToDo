@@ -1,41 +1,34 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import TableRow from './TableRow'
+import Menu from './Menu'
+import Table from './Table'
 
 class Tasks extends Component {
   state = {
-    tasks: [{}, {}, {}, {}, {}]
+    status: this.props.status,
+    tasks:  [{}, {}, {}, {}, {}]
   }
 
   componentDidMount(){
-    this.fetchTasks()
+    const { status } = this.state
+    this.fetchTasks(status)
   }
 
-  fetchTasks = () => {
-    axios.get(`/tasks.json`)
+  fetchTasks = (status) => {
+    axios.get(`/tasks.json?status=${status}`)
       .then(response => {
         const { tasks } = response.data
-        this.setState({ tasks })
+        this.setState({ tasks, status })
       })
   }
 
   render(){
     const { tasks } = this.state
     return(
-      <table className="table">
-        <thead>
-          <tr>
-            <th style={{width: '70%'}}>Description</th>
-            <th style={{width: '15%'}}>Due</th>
-            <th style={{width: '15%'}}></th>
-          </tr>
-        </thead>
-        <tbody>
-          { tasks.map((task, index) => (
-              <TableRow key={index} {...task} />
-          ))}
-        </tbody>
-      </table>
+      <React.Fragment>
+        <Menu />
+        <Table tasks={tasks}/>
+      </React.Fragment>
     )
   }
 }
