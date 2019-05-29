@@ -4,11 +4,19 @@ class TasksController < ApplicationController
 
 
   # GET /tasks
+  # GET /tasks.json
   def index
-    page      = (params[:page] || 1).to_i
-    per_page  = 5
-    @tasks    = @tasks.paginate(page: page, per_page: per_page)
-    @task     = Task.new
+    respond_to do |format|
+      format.html do
+        @task = Task.new
+      end
+      format.json do
+        page      = (params[:page] || 1).to_i
+        per_page  = 5
+        @tasks    = @tasks.paginate(page: page, per_page: per_page)
+        render json: { tasks: @tasks }
+      end
+    end
   end
 
   # POST /tasks

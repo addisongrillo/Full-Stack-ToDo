@@ -27,4 +27,15 @@ class Task < ApplicationRecord
       "due_date badge badge-success"
     end
   end
+
+  def as_json(options={})
+    {
+      id:             id,
+      description:    description,
+      completed:      completed,
+      due_date:       due_date&.strftime('%-m/%-d/%y'),
+      location:       "/tasks/#{id}/sub_tasks",
+      due_date_class: due_date_class
+    }
+  end
 end
