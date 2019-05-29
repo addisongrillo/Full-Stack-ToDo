@@ -8,12 +8,12 @@ class Tasks extends Component {
   state = {
     status: this.props.status,
     tasks:  [{}, {}, {}, {}, {}],
-    due: ''
+    due:    '',
+    term:   ''
   }
 
   componentDidMount(){
-    const { status, due } = this.state
-    const term = ''
+    const { status, due, term } = this.state
     this.fetchTasks(status, due, term)
   }
 
