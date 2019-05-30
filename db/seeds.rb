@@ -6,11 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+user = User.create(email: "some@guy.com", password: "password")
+
 20.times do
   task = Task.new(
     description:  Faker::ChuckNorris.fact,
     completed:    [true, false].sample,
-    due_date:     Faker::Date.between(3.months.ago.to_date, 3.months.from_now.to_date)
+    due_date:     Faker::Date.between(3.months.ago.to_date, 3.months.from_now.to_date),
+    user:         user
   )
   task.due_date = nil if [true, false].sample
   task.save!
