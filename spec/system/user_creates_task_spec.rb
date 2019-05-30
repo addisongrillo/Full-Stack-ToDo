@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "task creation", type: :system, js: true do
+  let(:user){ User.create(email: "some@guy.com", password: "password") }
   before do
+    sign_in(user)
     visit root_path
   end
   context "when the task description is present" do

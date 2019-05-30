@@ -12,7 +12,7 @@ class SubTasksController < ApplicationController
   end
 
   def index
-    @task = Task.find(params[:task_id])
+    @task = current_user.tasks.find(params[:task_id])
     @sub_task = SubTask.new
   end
 
