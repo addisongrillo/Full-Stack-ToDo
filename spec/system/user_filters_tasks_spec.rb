@@ -1,28 +1,34 @@
 require "rails_helper"
  
 RSpec.describe "filtering tasks", type: :system, js: true do
+  let(:user){ User.create(email: "some@guy.com", password: "password") }
   before do
     ["Completed", "Pending"].each do |status|
       Task.create(
         description:  "#{status} Not Due",
         due_date:     nil,
-        completed:    status == "Completed"
+        completed:    status == "Completed",
+        user:         user
       )
       Task.create(
         description:  "#{status} Due Later",
         due_date:     10.days.from_now.to_date,
-        completed:    status == "Completed"
+        completed:    status == "Completed",
+        user:         user
       )
       Task.create(
         description:  "#{status} Due Soon",
         due_date:     3.days.from_now.to_date,
-        completed:    status == "Completed"
+        completed:    status == "Completed",
+        user:         user
       )
       Task.create(
         description:  "#{status} Past Due",
         due_date:     3.days.ago.to_date,
-        completed:    status == "Completed"
+        completed:    status == "Completed",
+        user:         user
       )
+      sign_in(user)
     end
   end
   context "when the user requests completed tasks" do

@@ -1,11 +1,15 @@
 require "rails_helper"
 
 RSpec.describe "viewing tasks", type: :system, js: true do
+  let(:user){ User.create(email: "some@guy.com", password: "password") }
+  before do
+    sign_in(user)
+  end
   it "displays the tasks ordered by due date, with tasks without due dates last" do
-    not_due   = Task.create(description: "Not Due", due_date: nil)
-    due_later = Task.create(description: "Due Later", due_date: 10.days.from_now.to_date)
-    due_soon  = Task.create(description: "Due Soon", due_date: 3.days.from_now.to_date)
-    past_due  = Task.create(description: "Past Due", due_date: 3.days.ago.to_date)
+    not_due   = Task.create(description: "Not Due", due_date: nil, user: user)
+    due_later = Task.create(description: "Due Later", due_date: 10.days.from_now.to_date, user: user)
+    due_soon  = Task.create(description: "Due Soon", due_date: 3.days.from_now.to_date, user: user)
+    past_due  = Task.create(description: "Past Due", due_date: 3.days.ago.to_date, user: user)
  
     visit root_path
  
@@ -24,8 +28,8 @@ RSpec.describe "viewing tasks", type: :system, js: true do
   end
   context "when the user requests all tasks" do
     it "displays both pending and completed tasks" do
-      Task.create(description: "Completed Task", completed: true)
-      Task.create(description: "Pending Task", completed: false)
+      Task.create(description: "Completed Task", completed: true, user: user)
+      Task.create(description: "Pending Task", completed: false, user: user)
 
       visit root_path
 
@@ -35,7 +39,7 @@ RSpec.describe "viewing tasks", type: :system, js: true do
   end
   context "when a task is past due" do
     it "displays the due_date in red" do
-      task = Task.create(description: "past due", due_date: 1.day.ago.to_date)
+      task = Task.create(description: "past due", due_date: 1.day.ago.to_date, user: user)
       visit root_path
 
       sleep 1
@@ -46,7 +50,7 @@ RSpec.describe "viewing tasks", type: :system, js: true do
   end
   context "when a task is due soon" do
     it "displays the due_date in yellow" do
-      task = Task.create(description: "due soon", due_date: Date.tomorrow)
+      task = Task.create(description: "due soon", due_date: Date.tomorrow, user: user)
       visit root_path
 
       sleep 1
@@ -57,7 +61,7 @@ RSpec.describe "viewing tasks", type: :system, js: true do
   end
   context "when a task is due later" do
     it "displays the due_date in green" do
-      task = Task.create(description: "due later", due_date: 10.days.from_now.to_date)
+      task = Task.create(description: "due later", due_date: 10.days.from_now.to_date, user: user)
       visit root_path
 
       sleep 1
