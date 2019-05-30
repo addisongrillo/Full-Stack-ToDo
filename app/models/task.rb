@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   has_many :sub_tasks, dependent: :destroy
+  belongs_to :user
 
   validates :description, presence: true
 

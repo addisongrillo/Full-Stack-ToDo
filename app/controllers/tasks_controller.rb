@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @task = Task.new
+        @task = current_user.tasks.new
       end
       format.json do
         page        = (params[:page] || 1).to_i
@@ -24,6 +24,7 @@ class TasksController < ApplicationController
   # POST /tasks
   def create
     @task = Task.new(task_params)
+    @task.user = current_user
     if @task.save
       redirect_back fallback_location: root_path, notice: 'Task was successfully created.'
     else
@@ -47,7 +48,7 @@ class TasksController < ApplicationController
   private
 
   def set_tasks
-    @tasks  = Task.all.ordered
+    @tasks  = current_user.tasks.ordered
     @tasks  = case params[:status]
               when "completed"
                 @tasks.completed
@@ -73,7 +74,7 @@ class TasksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
