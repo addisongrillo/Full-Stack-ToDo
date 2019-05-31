@@ -3,13 +3,16 @@ import dateFns from 'date-fns'
 import Header from './Header'
 import Days from './Days'
 import Cells from './Cells'
-import axios from 'axios';
+import axios from 'axios'
+import CalendarModal from './CalendarModal'
 
 class Calendar extends Component {
   state = {
     currentMonth: new Date(),
     currentDate:  new Date(),
-    tasks:        {}
+    tasks:        {},
+    selectedDate: new Date(),
+    modalOpen:    false
   }
 
   componentDidMount(){
@@ -26,6 +29,14 @@ class Calendar extends Component {
       .then(response => this.setState({ tasks: response.data, currentMonth }))
   }
 
+  handleDateClick = day => {
+    this.setState({ selectedDate: day, modalOpen: true })
+  }
+
+  closeModal = () => {
+    this.setState({ modalOpen: false })
+  }
+
   nextMonth = () => {
     const currentMonth = dateFns.addMonths(this.state.currentMonth, 1)
     this.fetchTasks(currentMonth)
@@ -37,7 +48,7 @@ class Calendar extends Component {
   }
 
   render(){
-    const { currentMonth, currentDate, tasks } = this.state
+    const { currentMonth, currentDate, tasks, selectedDate, modalOpen } = this.state
     return(
       <div className="calendar">
         <Header
@@ -50,6 +61,13 @@ class Calendar extends Component {
           currentMonth={currentMonth}
           currentDate={currentDate}
           tasks={tasks}
+          handleDateClick={this.handleDateClick}
+        />
+        <CalendarModal
+          modalOpen={modalOpen}
+          selectedDate={selectedDate}
+          closeModal={this.closeModal}
+          dailyTasks={ tasks[dateFns.format(selectedDate, 'YYYY-MM-DD')] || [] }
         />
       </div>
     )

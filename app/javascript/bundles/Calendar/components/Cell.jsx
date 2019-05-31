@@ -7,7 +7,9 @@ const Cell = props => (
     className={`calendar-col cell ${
       !dateFns.isSameMonth(props.day, props.currentMonth) ? "disabled"
         : dateFns.isSameDay(props.day, props.currentDate) ? "current" : ""
-  }`}>
+    }`}
+    onClick={ () => { props.handleDateClick(props.day) } }
+  >
     <div className="calendar-events">
       {
         props.dailyTasks.map(task => {
