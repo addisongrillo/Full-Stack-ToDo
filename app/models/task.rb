@@ -15,7 +15,9 @@ class Task < ApplicationRecord
   scope :due_later, ->  { where("due_date >= ?", 1.week.from_now.to_date) }
   scope :not_due,   ->  { where(due_date: nil) }
   scope :search,    ->  (term) { where("description ilike ?", "%#{term}%") }
-
+  scope :between,   ->  (start_date, end_date) {
+                          where("due_date >= ? and due_date <= ?", start_date, end_date)
+                        }
 
   def due_date_class
     if due_date.nil?

@@ -8,7 +8,7 @@
 
 user = User.create(email: "some@guy.com", password: "password")
 
-20.times do
+200.times do
   task = Task.new(
     description:  Faker::ChuckNorris.fact,
     completed:    [true, false].sample,
