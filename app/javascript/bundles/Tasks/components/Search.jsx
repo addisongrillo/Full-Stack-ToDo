@@ -9,6 +9,7 @@ const Search = props => (
       placeholder="Search"
       onChange={props.handleSearch}
       value={props.term}
+      autoComplete="off"
     />
   </div>
 )

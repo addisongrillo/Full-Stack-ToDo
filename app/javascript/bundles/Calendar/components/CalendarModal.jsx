@@ -1,6 +1,7 @@
 import React from 'react'
-import { Modal, ModalHeader, ModalBody } from 'reactstrap'
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import dateFns from 'date-fns'
+import Form from './Form'
 
 const CalendarModal = props => (
   <Modal isOpen={props.modalOpen} toggle={props.closeModal}>
@@ -30,6 +31,13 @@ const CalendarModal = props => (
         <p><i>No tasks due today</i></p>
       }
     </ModalBody>
+    <ModalFooter>
+      <Form
+        task={props.task}
+        handleDescriptionChange={props.handleDescriptionChange}
+        handleFormSubmit={props.handleFormSubmit}
+      />
+    </ModalFooter>
   </Modal>
 )
 

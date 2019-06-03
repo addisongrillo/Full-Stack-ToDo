@@ -2,7 +2,6 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:update, :destroy]
   before_action :set_tasks, only: [:index]
 
-
   # GET /tasks
   # GET /tasks.json
   def index
@@ -26,9 +25,25 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
     if @task.save
-      redirect_back fallback_location: root_path, notice: 'Task was successfully created.'
+      respond_to do |format|
+        format.html do
+          redirect_back fallback_location: root_path,
+          notice: 'Task was successfully created.'
+        end
+        format.json do
+          render json: @task
+        end
+      end
     else
-      redirect_back fallback_location: root_path, alert: @task.errors.full_messages.to_sentence
+      respond_to do |format|
+        format.html do
+          redirect_back fallback_location: root_path,
+          alert: @task.errors.full_messages.to_sentence
+        end
+        format.json do
+          render json: { errors: @task.errors.full_messages }, status: 422
+        end
+      end
     end
   end
   
